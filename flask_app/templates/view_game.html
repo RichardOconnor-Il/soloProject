@@ -9,13 +9,16 @@
 <body>
     <div class="nav-bar">
         <h1>Game Review</h1>
-        <a href="">Home Page</a>
-        <Button>Logout</Button>
+        <a href="/home">Home Page</a>
+        <a href="/logout">
+            <Button>Logout</Button>
+        </a>
     </div>
 
     <div>
-        <h3>Game name</h3>
-        <p>placeholder for description</p>
+        <h3>{{game.name}}</h3>
+        <img src="{{game.image}}" alt="image of {{game.name}}">
+        <p>{{game.description}}</p>
         <!--Average Ratings here-->
     </div>
 

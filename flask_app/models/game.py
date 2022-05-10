@@ -59,9 +59,9 @@ class Game:
             flash('The game name needs at minimum 4 characters', 'game_error')
             is_vaild = False
         if len(game['description']) < 25:
-            flash('Description must be a minimum of 25 characters')
+            flash('Description must be a minimum of 25 characters', 'game_error')
             is_vaild = False
         if len(game['genre']) < 3:
-            flash("The genre must have a 3 character minimum")
+            flash("The genre must have a 3 character minimum", 'game_error')
             is_vaild = False
         return is_vaild

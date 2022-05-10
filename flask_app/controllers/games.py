@@ -23,7 +23,7 @@ def add_Game():
         "description" : request.form['description'],
         "genre" : request.form['genre'],
         "image" : request.form['image'],
-        "dev_id" : request.form['dev_id']
+        "dev_id" : session['dev_id']
     }
     Game.save(data)
     return redirect('/home')
@@ -60,4 +60,10 @@ def update():
 def devGames(id):
     if 'dev_id' not in session:
         return redirect('logout')
-    
+    data = {
+        "id" : id
+    }
+    dev_data = {
+        "id" : session['dev_id']
+    }
+    return render_template('your_games.html', games = Game.get_all_by_dev_id(data), dev = Dev.get_by_id(dev_data))

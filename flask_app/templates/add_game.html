@@ -9,20 +9,30 @@
 <body>
     <div class="nav-bar">
         <h1>Game Review</h1>
-        <a href="">Home Page</a>
-        <Button>Logout</Button>
+        <a href="/home">Home Page</a>
+        <a href="/logout">
+            <Button>Logout</Button>
+        </a>
     </div>
 
     <h3>A New Game to be Reviewed</h3>
 
-    <form>
+    <form action="/post/game" method="POST">
+        {% with messages = get_flashed_messages(category_filter=['game_error']) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <label for="name">Game Title</label>
         <input type="text" name="name" placeholder="Game Title">
         <label for="genre">Genre</label>
         <input type="text" name="genre" placeholder="Genre">
         <label for="description">Description</label>
         <textarea name="description" id="description" placeholder="Tell us about the game"></textarea>
-        <input type="file" name="image" id="game_img">
+        <label for="image">Link for the image</label>
+        <input type="text" name="image" id="game_img">
         <button type="submit" value="submit">Submit</button>
     </form>
 </body>

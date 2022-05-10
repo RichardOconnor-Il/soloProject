@@ -9,13 +9,18 @@
 <body>
     <div class="nav-bar">
         <h1>Game Review</h1>
-        <a href="">Home Page</a>
-        <Button>Logout</Button>
+        <a href="/home">Home Page</a>
+        <a href="/logout">
+            <Button>Logout</Button>
+        </a>
     </div>
     <h3>Here are the games you added</h3>
 
     <div>
         <!--Loop to show all games-->
+        {% for game in games %}
+            {{game.name}}
+        {% endfor %}
     </div>
 </body>
 </html>
