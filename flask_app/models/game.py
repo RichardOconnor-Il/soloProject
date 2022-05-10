@@ -43,6 +43,15 @@ class Game:
         results = connectToMySQL(cls.db_name).query_db(query, data)
         return cls(results[0])
 
+    @classmethod
+    def get_all_by_dev_id(cls, data):
+        query = "SELECT * FROM games WHERE dev_id = %(dev_id)s"
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        games = []
+        for row in results:
+            games.append(cls(row))
+        return games
+
     @staticmethod
     def validate_game(game):
         is_vaild = True
