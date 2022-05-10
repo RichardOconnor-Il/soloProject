@@ -17,7 +17,7 @@ def login():
         flash("Invaild Email", 'login_error')
         return redirect('/')
     if not bcrypt.check_password_hash(dev.password , request.form['password']):
-        flash('Invaild Password, login_error')
+        flash('Invaild Password', 'login_error')
         return redirect('/')
     session['dev_id'] = dev.id
     return redirect('/home')

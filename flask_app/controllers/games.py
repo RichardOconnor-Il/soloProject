@@ -56,3 +56,8 @@ def update():
     Game.update(data)
     return redirect('/home')
 
+@app.route('/view/games/<int:id>')
+def devGames(id):
+    if 'dev_id' not in session:
+        return redirect('logout')
+    

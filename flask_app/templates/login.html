@@ -8,8 +8,15 @@
 </head>
 <body>
     <h1>Game Review</h1>
-    <form>
+    <form action="/register" method="POST">
         <h3>Sign Up</h3>
+        {% with messages = get_flashed_messages(category_filter=['register_error']) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <input type="text" name="username" placeholder="Username">
         <input type="text" name="company" placeholder="Company Name">
         <input type="text" name="email" placeholder="Email">
@@ -17,10 +24,17 @@
         <input type="password" name="confirm_password" placeholder="Confirm Password">
         <button type="submit" value="submit">Submit</button>
     </form>
-    <form>
+    <form action="/login" method="POST">
         <h3>Login</h3>
+        {% with messages = get_flashed_messages(category_filter=['login_error']) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <input type="text" name="email" placeholder="Email">
-        <input type="password" name="paswword" placeholder="Password">
+        <input type="password" name="password" placeholder="Password">
         <button type="submit" value="submit">Sign In</button>
     </form>
 </body>
