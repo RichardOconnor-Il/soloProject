@@ -16,11 +16,19 @@
     </div>
     <h3>Here are the games you added</h3>
 
+    {% for game in games %}
     <div>
-        <!--Loop to show all games-->
-        {% for game in games %}
+        <Img src="{{game.image}}">
+        <a href="/view/review/{{game.id}}">
             {{game.name}}
-        {% endfor %}
+        </a>
+        <a href="/edit/game/{{game.id}}">
+            Edit
+        </a>
+        <a href="/delete/game/{{game.id}}">
+            Delete
+        </a>
     </div>
+    {% endfor %}
 </body>
 </html>

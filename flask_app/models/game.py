@@ -29,7 +29,7 @@ class Game:
 
     @classmethod
     def update(cls, data):
-        query = "UPDATE games SET name = %(name)s, description = %(description)s, genre = %(genre)s, image = %(image)s;"
+        query = "UPDATE games SET name = %(name)s, description = %(description)s, genre = %(genre)s, image = %(image)s WHERE id = %(id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     @classmethod
@@ -44,8 +44,8 @@ class Game:
         return cls(results[0])
 
     @classmethod
-    def get_all_by_dev_id(cls, data):
-        query = "SELECT * FROM games WHERE dev_id = %(dev_id)s"
+    def get_all_by_dev(cls, data):
+        query = "SELECT * FROM games WHERE dev_id = %(id)s"
         results = connectToMySQL(cls.db_name).query_db(query, data)
         games = []
         for row in results:
