@@ -24,17 +24,30 @@
 
     <div>
         <h3>Add a Review</h3>
-        <form>
-            <textarea></textarea>
-            <!--stars for input of rating here-->
-            <input type="radio">
+        <form action="/add/review/{{game.id}}" method="POST">
+            {% with messages = get_flashed_messages(category_filter=['review_error']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <textarea name="review"></textarea>
+            <input type="radio" name="rating" id="1" value="1">
+            <input type="radio" name="rating" id="1" value="2">
+            <input type="radio" name="rating" id="1" value="3">
+            <input type="radio" name="rating" id="1" value="4">
+            <input type="radio" name="rating" id="1" value="5">
             <button type="submit" value="submit">Submit</button>
         </form>
     </div>
-    
+
     <div>
         <h3>Reviews</h3>
-        <!--Loop all reviews added-->
+        {% for review in reviews %}
+            <p>{{review.review}}</p>
+            <p>{{review.rating}}</p>
+        {% endfor %}
     </div>
 </body>
 </html>

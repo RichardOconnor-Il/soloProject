@@ -14,4 +14,19 @@ def reviews(id):
     dev_data = {
         "id" : session['dev_id']
     }
-    return render_template('view_game.html', game = Game.get_one_game(data), dev = Dev.get_by_id(dev_data))
+    return render_template('view_game.html', game = Game.get_one_game(data), dev = Dev.get_by_id(dev_data), reviews = Review.get_all_by_game(data))
+
+@app.route('/add/review/<int:id>', methods={"POST"})
+def add_review(id):
+    if 'dev_id' not in session:
+        return redirect('/logout')
+    if not Review.validate_review(request.form):
+        return redirect('/view/review/'+ str(id))
+    data = {
+        "review" : request.form['review'],
+        "rating" : int(request.form['rating']),
+        "game_id" : id,
+        "dev_id" : session['dev_id']
+    }
+    Review.save(data)
+    return redirect('/view/review/'+ str(id))

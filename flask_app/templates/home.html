@@ -22,7 +22,9 @@
         <a href="/view/review/{{game.id}}">
             {{game.name}}
         </a>
-        
+        {% if reviews.game_id == game.id %}
+            <p>{{reviews.rating}}</p>
+        {% endif %}
 
     </div>
     {% endfor %}
