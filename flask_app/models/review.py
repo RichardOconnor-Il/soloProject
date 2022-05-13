@@ -1,4 +1,3 @@
-from unittest import result
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 
@@ -19,15 +18,6 @@ class Review:
         return connectToMySQL(cls.db_name).query_db(query, data)
 
     @classmethod
-    def get_all(cls):
-        query = "SELECT * FROM reviews;"
-        results = connectToMySQL(cls.db_name).query_db(query)
-        reviews = []
-        for row in results:
-            reviews.append(cls(row))
-        return reviews
-
-    @classmethod
     def get_all_by_game(cls, data):
         query = "SELECT * FROM reviews WHERE game_id = %(id)s"
         results = connectToMySQL(cls.db_name).query_db(query, data)
@@ -37,9 +27,17 @@ class Review:
         return reviews
 
     @classmethod
-    def delete(cls, data):
-        query = "DELETE FROM reviews WHERE id = %(id)s;"
-        return connectToMySQL(cls.db_name).query_db(query, data)
+    def get_avg_rating_for_all(cls):
+        query = "SELECT game_id, AVG(rating) 'avg' FROM reviews GROUP BY game_id"
+        results = connectToMySQL(cls.db_name).query_db(query)
+        print(results)
+        return results
+
+    @classmethod
+    def get_avg_rating_for_game(cls, data):
+        query = "SELECT AVG(rating) 'avg' FROM reviews where game_id = %(id)s"
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        return results[0]
 
     @staticmethod
     def validate_review(review):

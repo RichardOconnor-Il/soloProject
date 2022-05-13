@@ -43,7 +43,7 @@ def home():
     data = {
         "id" : session['dev_id']
     }
-    return render_template('home.html', dev = Dev.get_by_id(data), games = Game.get_all(), reviews = Review.get_all())
+    return render_template('home.html', dev = Dev.get_by_id(data), games = Game.get_all(), ratings = Review.get_avg_rating_for_all())
 
 @app.route('/logout')
 def logout():

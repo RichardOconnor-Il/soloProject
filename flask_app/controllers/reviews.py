@@ -14,7 +14,7 @@ def reviews(id):
     dev_data = {
         "id" : session['dev_id']
     }
-    return render_template('view_game.html', game = Game.get_one_game(data), dev = Dev.get_by_id(dev_data), reviews = Review.get_all_by_game(data))
+    return render_template('view_game.html', game = Game.get_one_game(data), dev = Dev.get_by_id(dev_data), reviews = Review.get_all_by_game(data), average = Review.get_avg_rating_for_game(data))
 
 @app.route('/add/review/<int:id>', methods={"POST"})
 def add_review(id):

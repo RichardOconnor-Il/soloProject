@@ -19,7 +19,8 @@
         <h3>{{game.name}}</h3>
         <img src="{{game.image}}" alt="image of {{game.name}}">
         <p>{{game.description}}</p>
-        <!--Average Ratings here-->
+        <p>Average rating here </p> 
+        {{average.avg}}
     </div>
 
     <div>
@@ -34,14 +35,14 @@
             {% endwith %}
             <textarea name="review"></textarea>
             <input type="radio" name="rating" id="1" value="1">
-            <input type="radio" name="rating" id="1" value="2">
-            <input type="radio" name="rating" id="1" value="3">
-            <input type="radio" name="rating" id="1" value="4">
-            <input type="radio" name="rating" id="1" value="5">
+            <input type="radio" name="rating" id="2" value="2">
+            <input type="radio" name="rating" id="3" value="3">
+            <input type="radio" name="rating" id="4" value="4">
+            <input type="radio" name="rating" id="5" value="5">
             <button type="submit" value="submit">Submit</button>
         </form>
     </div>
-
+    
     <div>
         <h3>Reviews</h3>
         {% for review in reviews %}
