@@ -28,7 +28,7 @@ class Review:
 
     @classmethod
     def get_avg_rating_for_all(cls):
-        query = "SELECT game_id, AVG(rating) 'avg' FROM reviews GROUP BY game_id"
+        query = "select games.id, reviews.game_id, AVG(rating) 'avg' from games left join reviews on games.id = reviews.game_id group by id "
         results = connectToMySQL(cls.db_name).query_db(query)
         print(results)
         return results

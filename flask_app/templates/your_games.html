@@ -9,31 +9,35 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-    <div class="navbar">
-        <h1>Game Review</h1>
+    <div class="navbar navbar-dark bg-primary p-4">
+        <h1 class="display-3">Game Review</h1>
         <div>
-            <a href="/home">Home Page</a>
+            <a href="/home" class="text-dark text-decoration-none">Home Page</a>
             <a href="/logout" class="ms-5">
-                <Button>Logout</Button>
+                <Button class="btn btn-dark">Logout</Button>
             </a>
         </div>
     </div>
-    <h3>Here are the games you added</h3>
+    <h3 class="text-center mt-5">Here are the games you added</h3>
 
-    {% for game in games %}
-    <div>
-        <Img src="{{game.image}}">
-        <a href="/view/review/{{game.id}}">
-            {{game.name}}
-        </a>
-        <a href="/edit/game/{{game.id}}">
-            Edit
-        </a>
-        <a href="/delete/game/{{game.id}}">
-            Delete
-        </a>
+    <div class="container mt-5">
+        <div class="row">
+            {% for game in games %}
+            <div class="col-3">
+                <Img src="{{game.image}}" width="300px" height="300px">
+                <p class="text-center mt-5">
+                    <a href="/view/review/{{game.id}}">{{game.name}}</a>
+                </p>
+                <br>
+                <p class="text-center">
+                    <a href="/edit/game/{{game.id}}">Edit</a>
+                    <a href="/delete/game/{{game.id}}" class="ms-3">Delete</a>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
