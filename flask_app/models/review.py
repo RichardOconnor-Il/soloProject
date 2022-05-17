@@ -45,7 +45,4 @@ class Review:
         if len(review['review']) < 25:
             flash('The review must be at least 25 characters', "review_error")
             is_valid = False
-        if len(review['rating']) < 1:
-            flash('Select a proper rating', 'review_error')
-            is_valid = False
         return is_valid

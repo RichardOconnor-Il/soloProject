@@ -12,26 +12,27 @@
     <div class="navbar navbar-dark bg-primary p-4">
         <h1 class="display-3">Game Review</h1>
         <div>
-            <a href="/home" class="text-dark text-decoration-none">Home Page</a>
+            <a href="/home" class="text-light text-decoration-none">Home Page</a>
+            <a href="/add/game" class="ms-5 text-light text-decoration-none">Add Game</a>
             <a href="/logout" class="ms-5">
                 <Button class="btn btn-dark">Logout</Button>
             </a>
         </div>
     </div>
-    <h3 class="text-center mt-5">Here are the games you added</h3>
+    <h3 class="text-center fs-1 mt-5">Here are the games you added</h3>
 
     <div class="container mt-5">
         <div class="row">
             {% for game in games %}
             <div class="col-3">
-                <Img src="{{game.image}}" width="300px" height="300px">
+                <Img src="{{game.image}}" class="border border-5 border-dark" width="300px" height="300px">
                 <p class="text-center mt-5">
-                    <a href="/view/review/{{game.id}}">{{game.name}}</a>
+                    <a href="/view/review/{{game.id}}" class="fs-3">{{game.name}}</a>
                 </p>
                 <br>
                 <p class="text-center">
-                    <a href="/edit/game/{{game.id}}">Edit</a>
-                    <a href="/delete/game/{{game.id}}" class="ms-3">Delete</a>
+                    <a href="/edit/game/{{game.id}}" class="fs-4">Edit</a>
+                    <a href="/delete/game/{{game.id}}" class="ms-3 fs-4">Delete</a>
                 </p>
             </div>
             {% endfor %}

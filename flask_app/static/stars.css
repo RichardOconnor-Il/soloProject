@@ -1,0 +1,39 @@
+.ratings {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    }
+.ratings > input{
+    display: none;
+}
+.ratings > label {
+    position: relative;
+    width: 1.1em;
+    font-size: 3vw;
+    color: #FFD700;
+    cursor: pointer;
+}
+.ratings > label::before{
+    content: "\2605";
+    position: absolute;
+    opacity: 0;
+    }
+.ratings > label:hover:before,
+.ratings > label:hover ~ label:before {
+    opacity: 1 !important;
+}
+        
+.ratings > input:checked ~ label:before{
+    opacity:1;
+}
+
+.ratings:hover > input:checked ~ label:before{ 
+    opacity: 0.4;
+}
+/* Credit to Shantanu Jana from Foolish Developer for the star rating with radio options*/
+/*https://www.foolishdeveloper.com/2022/01/5-star-rating-html-css.html*/
+
+.checked{
+    color: #FFD700;
+
+}

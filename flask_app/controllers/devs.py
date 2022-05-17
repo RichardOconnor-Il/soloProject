@@ -8,6 +8,8 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():
+    if 'dev_id' in session:
+        return redirect('/home')
     return render_template('login.html')
 
 @app.route('/login', methods=["POST"])

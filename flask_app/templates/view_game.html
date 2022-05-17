@@ -7,52 +7,170 @@
     <title>Game title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stars.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
     <div class="navbar navbar-dark bg-primary p-4">
         <h1 class="display-3">Game Review</h1>
         <div>
-            <a href="/home" class="text-dark text-decoration-none">Home Page</a>
+            <a href="/home" class="text-light text-decoration-none">Home Page</a>
+            <a href="/add/game" class="ms-5 text-light text-decoration-none">Add Game</a>
             <a href="/logout" class="ms-5"> 
                 <Button class="btn btn-dark">Logout</Button>  
             </a>
         </div>
     </div>
 
-    <div>
-        <h3>{{game.name}}</h3>
-        <img src="{{game.image}}" alt="image of {{game.name}}">
-        <p>{{game.description}}</p>
-        <p>Average rating here </p> 
-        {{average.avg}}
+    <div class="container">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-md-auto">
+                <h1 class="display-1 text-capitalize text-center">{{game.name}}</h1>
+                <img src="{{game.image}}" class="border border-5 border-dark" width="500px" height="500px"  >
+                <div class="text-wrap" style="width: 500px;">
+                    <h3>Game Description</h3>
+                    <p class="text-break ps-4">{{game.description}}</p>
+                </div>
+                <div class="ms-5">
+                    <span id="{{average.avg}}stars" class="visually-hidden">{{average.avg}}</span>
+                    <span class="fa fa-star checked" id="1star"></span>
+                    <span class="fa fa-star checked" id="2star"></span>
+                    <span class="fa fa-star" id="3star"></span>
+                    <span class="fa fa-star" id="4star"></span>
+                    <span class="fa fa-star" id="5star"></span>
+                    <script>
+                        var avgStars = parseFloat(document.getElementById("{{average.avg}}stars").innerHTML);
+                        console.log(avgStars)
+                        if (avgStars > 4.5){
+                            document.getElementById("1star").className = "fa fa-star checked";
+                            document.getElementById("2star").className = "fa fa-star checked";
+                            document.getElementById("3star").className = "fa fa-star checked";
+                            document.getElementById("4star").className = "fa fa-star checked";
+                            document.getElementById("5star").className = "fa fa-star checked";
+                        }
+                        else if (avgStars > 3.5){
+                            document.getElementById("1star").className = "fa fa-star checked";
+                            document.getElementById("2star").className = "fa fa-star checked";
+                            document.getElementById("3star").className = "fa fa-star checked";
+                            document.getElementById("4star").className = "fa fa-star checked";
+                            document.getElementById("5star").className = "fa fa-star";
+                        }
+                        else if (avgStars > 2.5){
+                            document.getElementById("1star").className = "fa fa-star checked";
+                            document.getElementById("2star").className = "fa fa-star checked";
+                            document.getElementById("3star").className = "fa fa-star checked";
+                            document.getElementById("4star").className = "fa fa-star";
+                            document.getElementById("5star").className = "fa fa-star";
+                        }
+                        else if (avgStars > 1.5){
+                            document.getElementById("1star").className = "fa fa-star checked";
+                            document.getElementById("2star").className = "fa fa-star checked";
+                            document.getElementById("3star").className = "fa fa-star";
+                            document.getElementById("4star").className = "fa fa-star";
+                            document.getElementById("5star").className = "fa fa-star";
+                        }
+                        else if (avgStars >= 1){
+                            document.getElementById("1star").className = "fa fa-star checked";
+                            document.getElementById("2star").className = "fa fa-star";
+                            document.getElementById("3star").className = "fa fa-star";
+                            document.getElementById("4star").className = "fa fa-star";
+                            document.getElementById("5star").className = "fa fa-star";
+                        }
+                        else {
+                            document.getElementById("1star").className = "fa fa-star";
+                            document.getElementById("2star").className = "fa fa-star";
+                            document.getElementById("3star").className = "fa fa-star";
+                            document.getElementById("4star").className = "fa fa-star";
+                            document.getElementById("5star").className = "fa fa-star";
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div>
-        <h3>Add a Review</h3>
-        <form action="/add/review/{{game.id}}" method="POST">
-            {% with messages = get_flashed_messages(category_filter=['review_error']) %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p>{{message}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            <textarea name="review"></textarea>
-            <input type="radio" name="rating" id="1" value="1">
-            <input type="radio" name="rating" id="2" value="2">
-            <input type="radio" name="rating" id="3" value="3">
-            <input type="radio" name="rating" id="4" value="4">
-            <input type="radio" name="rating" id="5" value="5">
+    <div class="container">
+        <h3 class="mb-4">Add a Review</h3>
+        {% with messages = get_flashed_messages(category_filter=['review_error']) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/add/review/{{game.id}}" method="POST" class="d-flex align-items-center" style="padding-left: 25px;">
+            <textarea name="review" style="height: 200px; width:55%; resize: none; margin-right: 10%;"></textarea>
+            <div style="margin-right: 5%;" class="ratings">
+                <input type="radio" name="rating" id="5" value="5"><label for="5">☆</label>
+                <input type="radio" name="rating" id="4" value="4"><label for="4">☆</label>
+                <input type="radio" name="rating" id="3" value="3" checked><label for="3">☆</label>
+                <input type="radio" name="rating" id="2" value="2"><label for="2">☆</label>
+                <input type="radio" name="rating" id="1" value="1"><label for="1">☆</label>
+            </div>
             <button type="submit" class="btn btn-primary btn-lg" value="submit">Submit</button>
         </form>
     </div>
     
-    <div>
-        <h3>Reviews</h3>
-        {% for review in reviews %}
-            <p>{{review.review}}</p>
-            <p>{{review.rating}}</p>
-        {% endfor %}
+    <div class="container mt-5">
+        <h3 class="mb-4">Reviews</h3>
+        <div style="padding-left: 25px;">
+            {% for review in reviews %}
+                <div class="d-flex justify-content-between">
+                    <div class="text-wrap">
+                        <textarea readonly style="width: 700px; height: 100px; resize: none; border: none;">{{review.review}}</textarea>
+                    </div>
+                    <div>
+                        <span class="fa fa-star checked" id="1s{{loop.index}}"></span>
+                        <span class="fa fa-star checked" id="2s{{loop.index}}"></span>
+                        <span class="fa fa-star" id="3s{{loop.index}}"></span>
+                        <span class="fa fa-star" id="4s{{loop.index}}"></span>
+                        <span class="fa fa-star" id="5s{{loop.index}}"></span>
+                        <p class="visually-hidden" id="{{review.rating}}stars">{{review.rating}}</p>
+                        <script>
+                            var star = parseInt(document.getElementById("{{review.rating}}stars").innerHTML);
+                            console.log(star)
+                            if (star == 5){
+                                document.getElementById("1s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("2s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("3s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("4s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("5s{{loop.index}}").className = "fa fa-star checked";
+                            }
+                            else if (star == 4){
+                                document.getElementById("1s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("2s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("3s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("4s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("5s{{loop.index}}").className = "fa fa-star";
+                            }
+                            else if (star == 3){
+                                document.getElementById("1s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("2s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("3s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("4s{{loop.index}}").className = "fa fa-star";
+                                document.getElementById("5s{{loop.index}}").className = "fa fa-star";
+                            }
+                            else if (star == 2){
+                                document.getElementById("1s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("2s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("3s{{loop.index}}").className = "fa fa-star";
+                                document.getElementById("4s{{loop.index}}").className = "fa fa-star";
+                                document.getElementById("5s{{loop.index}}").className = "fa fa-star";
+                            }
+                            else{
+                                document.getElementById("1s{{loop.index}}").className = "fa fa-star checked";
+                                document.getElementById("2s{{loop.index}}").className = "fa fa-star";
+                                document.getElementById("3s{{loop.index}}").className = "fa fa-star";
+                                document.getElementById("4s{{loop.index}}").className = "fa fa-star";
+                                document.getElementById("5s{{loop.index}}").className = "fa fa-star";
+                            }
+                        </script>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
